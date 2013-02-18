@@ -1,7 +1,7 @@
 /**
  * 
  */
-define(['jq', 'Mstar', 'animate'], function($, M) {
+define(['jq', 'Mstar', 'slider'], function($, M) {
     
 	var dirMap = {
 	    'left': 'right',
@@ -10,7 +10,7 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 		'down': 'up'
 	};
 	var hashToBoxMap = {};
-	var animate = M.animate;
+	var slide = M.slider.slide;
 	var box1 = $('#box1');
 	var tmpHTML = box1.html();// 模拟数据 html部分
 	
@@ -18,7 +18,7 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	    var box = document.createElement('div');
 		box.id = hash.replace(/^#/, '');
 		box.className = 'box';
-		box.style.webkitTransform = 'translate3d(-100%, 0, 0)';
+		box.style.webkitTransform = 'translate3d(100%, 0, 0)';
 		document.body.appendChild(box);
 		return box;
 	}
@@ -47,41 +47,18 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 			}
 			console.log('显示：' + showData.hash + '::' + (reverse ? dirMap[showData.dir] : showData.dir));
 			var showBox = getBox(showData.hash);
-			var showDir = reverse ? dirMap[showData.dir] : showData.dir;
-			if (hideBox) {
-				animate(hideBox, {
-					time: 300,
-					x: '-100%',
-					y: 0,
-					callback: function() {
-					    
-					}
-				});
-			} else {
-			    animate(box1, {
-					time: 300,
-					x: '-100%',
-					y: 0,
-					callback: function() {
-					    
-					}
-				});
-			}
-			animate(showBox, {
-			    time: 300,
-				x: 0,
-				y: 0,
-				callback: function() {
-					
-				}
-			});
+			slide(showBox, hideBox, reverse ? hideData.dir : showData.dir, reverse);
 			showBox.bind('renderFinish', function() {
 			    new iScroll(showBox.find('.body')[0], {useTransition: true});
 			});
-			request(showData.hash, function() {
-			    showBox.html(tmpHTML);
-				showBox.trigger('renderFinish');
-			});
+			if (!showBox._hasRendered_) {
+			    request(showData.hash, function() {
+					showBox.html(tmpHTML);
+					showBox.trigger('renderFinish');
+				});
+				showBox._hasRendered_ = true;
+			}
+			
 		}
 		
 	};

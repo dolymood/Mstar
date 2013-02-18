@@ -1,16 +1,11 @@
 /**
  *
  */
-define(['jq', 'Mstar'], function($, M) {
-    
-	var android = $.os.android;
+define(['Mstar'], function(M) {
+
 	var fn = function() {};
 	
 	// ...考虑用同一个时间线统一管理动画
-	
-	function anroidAni(el, options) {
-	    var callback = options.callback || fn;
-	}
 	
 	function ani(el, options) {
 	    var callback = options.callback || fn;
@@ -34,11 +29,7 @@ define(['jq', 'Mstar'], function($, M) {
 	}
 	
 	M.animate = function(el, options) {
-	    if (android) {
-		    anroidAni(el, options);
-		} else {
-		    ani(el, options);
-		}
+		ani(el, options);
 	};
 	
 	return M;
