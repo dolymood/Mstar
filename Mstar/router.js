@@ -18,7 +18,7 @@ define(['jq', 'Mstar', 'slider'], function($, M) {
 	    var box = document.createElement('div');
 		box.id = hash.replace(/^#/, '');
 		box.className = 'box';
-		box.style.webkitTransform = 'translate3d(100%, 0, 0)';
+		box.style.webkitTransform = 'translate3d(-100%, 0, 0)';
 		document.body.appendChild(box);
 		return box;
 	}
@@ -47,7 +47,7 @@ define(['jq', 'Mstar', 'slider'], function($, M) {
 			}
 			console.log('显示：' + showData.hash + '::' + (reverse ? dirMap[showData.dir] : showData.dir));
 			var showBox = getBox(showData.hash);
-			slide(showBox, hideBox, reverse ? hideData.dir : showData.dir, reverse);
+			slide(showBox, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);
 			showBox.bind('renderFinish', function() {
 			    new iScroll(showBox.find('.body')[0], {useTransition: true});
 			});

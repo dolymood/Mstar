@@ -11,21 +11,32 @@ define(['Mstar'], function(M) {
 	    var callback = options.callback || fn;
 		el.trigger('animationStart', options);
 		var time;
-		if ((time = options.time)) {
+		if ((time = (options.time || 0))) {
 		    el.css('-webkit-transition', '-webkit-transform ' + time + 'ms ' + (options.timFn || 'ease'));
+		} else {
+		    el.css('-webkit-transition', 'none');
 		}
 		var x = options.x || 0,
 		    y = options.y || 0;
 		var aniEnd = function() {
-			clearTimeout(timeout);
+			if (time) {
+			    clearTimeout(timeout);
+				el.trigger('animationEnd', options);
+			}
 			options.callback(el);
-			el.trigger('animationEnd', options);
 		}
-		var timeout = setTimeout(function() {
-		    aniEnd();
-		}, time || 0);
-		el.bind('webkitTransitionEnd', aniEnd);
-		el.css('-webkit-transform', 'translate3d(' + x + ', ' + y + ', 0)');
+		if (time) {
+			var timeout = setTimeout(function() {
+				aniEnd();
+			}, time || 0);
+			el.unbind('webkitTransitionEnd').bind('webkitTransitionEnd', aniEnd);
+			el.css('-webkit-transform', 'translate3d(' + x + ', ' + y + ', 0)');
+		} else {
+		    el.unbind('webkitTransitionEnd');
+			el.css('-webkit-transform', 'translate3d(' + x + ', ' + y + ', 0)');
+			aniEnd();
+		}
+		
 	}
 	
 	M.animate = function(el, options) {
