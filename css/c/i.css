@@ -10,6 +10,7 @@ body {
 	right: 0;
 	bottom: 0;
 	background-color: rgb(191, 199, 216);
+	overflow: hidden;
 }
 i {
     display: block;
@@ -25,11 +26,16 @@ header {
 	background-color: #536ea7;
 	color: white;
 	display: -webkit-box;
-	box-sizing: border-box;
 	border-bottom: 1px solid #111b32;
 }
 header p {
 	-webkit-box-flex: 1;
+}
+.hdw {
+    -webkit-perspective: 1000;
+}
+.btn.active {
+    background-color: #e7e7e7;
 }
 .center {
     display: -webkit-box;
@@ -69,7 +75,7 @@ height: 45px;
 }
 .body {
     position: absolute;
-	top: 45px;
+	top: 46px;
 	width: 100%;
 	bottom: 0;
 }
@@ -80,7 +86,7 @@ margin: 10px;
     display: -webkit-box;
 }
 .wrapper {
-    
+
 }
 .item {
     margin: 10px 0;

@@ -1,9 +1,7 @@
 /**
  * 
  */
-(function(M, $) {
-    var locn = location,
-	    startHash = locn.hash;
+define(['Mstar'], function(M) {
 	
 	var his = M.history = {
 	    
@@ -11,40 +9,50 @@
 		activeIndex: 0,
 		
 		getActive: function() {
-		    return his.history[his.activeIndex];
-		},
-		
-		getLast: function() {
-		    if (!his.previousIndex) return null;
-			return his.history[his.previousIndex];
+		    return this.history[this.activeIndex];
 		},
 		
 		getNext: function() {
-		    return his.history[his.activeIndex + 1];
+		    return this.history[this.activeIndex + 1];
 		},
 		
 		getPrev: function() {
-			return his.history[his.activeIndex - 1];
+			return this.history[this.activeIndex - 1];
 		},
 		
 		clearForward: function() {
-		    his.history = his.history.slice( 0, his.activeIndex + 1 );  
+		    this.history = this.history.slice( 0, this.activeIndex + 1 );  
+		},
+		
+		find: function(hash, stack) {
+		    for (var i = 0, his = (stack || this.history), len = his.length, tmp; i < len; i++) {
+			    tmp = his[i];
+				if (decodeURIComponent(hash) === decodeURIComponent(tmp.hash) ||
+				    decodeURIComponent(hash) === decodeURIComponent(tmp.url)) {
+				    return i;
+				}
+			}
+			return;
+		},
+		
+		getInfo: function(index) {
+		    return this.history[index];
 		},
 		
 		add: function(url, data) {
 		    data = data || {};
-			
-		},
-		
-		back: function() {
-		    
+			if (this.getNext()) {
+				this.clearForward();
+			}
+			if (data.hash && data.hash.indexOf('#') === -1) {
+				data.hash = '#' + data.hash;
+			}
+
+			data.url = url;
+			this.history.push(data);
+			this.activeIndex = this.history.length - 1;
 		}
-		
 	};
 	
-	if (startHash && startHash!='#') {
-	    
-	} else {
-	    
-	}
-})(Mstar, $);
+	return M;
+});
