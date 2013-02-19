@@ -11,9 +11,9 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	}
 	
 	function hide_box(box) {
-	    setTimeout(function() {
-		    box.hide();
-		});
+	    // setTimeout(function() {
+		    // box.hide();
+		// }, 300);
 	}
 	
 	var iosSlide = {
