@@ -11,6 +11,7 @@ define(['jq', 'Mstar', 'slider'], function($, M) {
 	};
 	var hashToBoxMap = {};
 	var slide = M.slider.slide;
+	var loading = $('#loading');
 	var box1 = $('#box1');
 	var tmpHTML = box1.html();// 模拟数据 html部分
 	
@@ -47,18 +48,23 @@ define(['jq', 'Mstar', 'slider'], function($, M) {
 			}
 			console.log('显示：' + showData.hash + '::' + (reverse ? dirMap[showData.dir] : showData.dir));
 			var showBox = getBox(showData.hash);
-			slide(showBox, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);
 			showBox.bind('renderFinish', function() {
 			    new iScroll(showBox.find('.body')[0], {useTransition: true});
+				M.animate(showBox);
+				M.animate(loading, {
+				    x: '-100%'
+				});
 			});
 			if (!showBox._hasRendered_) {
-			    request(showData.hash, function() {
-					showBox.html(tmpHTML);
+			    slide(loading, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);
+				request(showData.hash, function() {
+					showBox.html(tmpHTML).find('header p').html('header' + showData.hash);
 					showBox.trigger('renderFinish');
 				});
 				showBox._hasRendered_ = true;
+			} else {
+			    slide(showBox, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);
 			}
-			
 		}
 		
 	};

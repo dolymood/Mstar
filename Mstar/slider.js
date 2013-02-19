@@ -10,6 +10,12 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	    
 	}
 	
+	function hide_box(box) {
+	    setTimeout(function() {
+		    box.hide();
+		});
+	}
+	
 	var iosSlide = {
 	    
 		slideleft: function(showBox, hideBox) {
@@ -19,22 +25,21 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 			    time: 0,
 				x: '100%',
 				callback: function() {
-				    //setTimeout(function() {
-					    animate(showBox, {
-							time: 300,
-							x: 0,
-							callback: function() {
-								//
-							}
-						});
-						animate(hideBox, {
-							time: 300,
-							x: '-100%',
-							callback: function() {
-								//
-							}
-						});
-					//});
+					animate(hideBox, {
+						time: 300,
+						x: '-100%',
+						callback: function() {
+							//
+							hide_box(hideBox);
+						}
+					});
+					animate(showBox, {
+						time: 300,
+						x: 0,
+						callback: function() {
+							//
+						}
+					});
 				}
 			});
 		},
@@ -46,14 +51,7 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 			    time: 0,
 				x: '-100%',
 				callback: function() {
-				    animate(showBox, {
-						time: 300,
-						x: 0,
-						callback: function() {
-							//
-						}
-					});
-					animate(hideBox, {
+				    animate(hideBox, {
 						time: 300,
 						x: '100%',
 						callback: function() {
@@ -62,10 +60,18 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 								x: '-100%',
 								callback: function() {
 									// -100%
+									hide_box(hideBox);
 								}
 							});
 						}
 					});
+					animate(showBox, {
+						time: 300,
+						x: 0,
+						callback: function() {
+							//
+						}
+					});				
 				}
 			});
 		},
@@ -86,6 +92,7 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 								x: '-100%',
 								callback: function() {
 									// -100%
+									hide_box(hideBox);
 								}
 							});
 							showBox.css('z-index', '');
@@ -113,6 +120,7 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 								x: '-100%',
 								callback: function() {
 									// -100%
+									hide_box(hideBox);
 								}
 							});
 							showBox.css('z-index', '');
@@ -131,13 +139,14 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 				callback: function() {
 				    animate(hideBox, {
 						time: 300,
-						y: '-100%',
+						y: '100%',
 						callback: function() {
 							animate(hideBox, {
 								time: 0,
 								x: '-100%',
 								callback: function() {
 									// -100%
+									hide_box(hideBox);
 								}
 							});
 							showBox.css('z-index', '');
@@ -155,13 +164,14 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 				callback: function() {
 				    animate(hideBox, {
 						time: 300,
-						y: '100%',
+						y: '-100%',
 						callback: function() {
 							animate(hideBox, {
 								time: 0,
 								x: '-100%',
 								callback: function() {
 									// -100%
+									hide_box(hideBox);
 								}
 							});
 							showBox.css('z-index', '');
