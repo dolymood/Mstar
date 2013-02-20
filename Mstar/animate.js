@@ -9,7 +9,15 @@ define(['Mstar', 'jq'], function(M, $) {
 	
 	function ani(el, options) {
 	    var callback = options.callback || fn;
+		var x = options.x || 0,
+		    y = options.y || 0;
 		el.unbind('webkitTransitionEnd');
+		var beginShow = (x === 0 || x === '0') && (y === 0 || y === '0');
+		if (beginShow) {
+		    el.trigger('startShow', options);
+		} else {
+		    el.trigger('startHide', options);
+		}
 		el.trigger('animationStart', options);
 		var time;
 		if ((time = (options.time || 0))) {
@@ -17,10 +25,14 @@ define(['Mstar', 'jq'], function(M, $) {
 		} else {
 		    el.css('-webkit-transition', '');
 		}
-		var x = options.x || 0,
-		    y = options.y || 0;
+		
 		var aniEnd = function() {
 			clearTimeout(timeout);
+			if (beginShow) {
+				el.trigger('finishShow', options);
+			} else {
+				el.trigger('finishHide', options);
+			}
 			el.trigger('animationEnd', options);
 			callback(el);
 		}

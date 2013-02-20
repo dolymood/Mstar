@@ -6,6 +6,7 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	var android = $.os.android;
 	var animate = M.animate;
 	
+	// android slide events-[animationStart animationEnd startShow startHide finishShow finishHide]
 	function andSlide(showBox, hideBox) {
 	    
 	}
@@ -19,8 +20,8 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	var iosSlide = {
 	    
 		slideleft: function(showBox, hideBox) {
-		    showBox.show();
-			hideBox.show();
+		    // showBox.show();
+			// hideBox.show();
 			animate(showBox, {
 			    time: 0,
 				x: '100%',
@@ -45,8 +46,8 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 		},
 		
 		slideright: function(showBox, hideBox) {
-		    showBox.show();
-			hideBox.show();
+		    // showBox.show();
+			// hideBox.show();
 			animate(showBox, {
 			    time: 0,
 				x: '-100%',
@@ -77,8 +78,8 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 		},
 		
 		slideup: function(showBox, hideBox) {
-		    showBox.show().css('z-index', '9999');
-			hideBox.show().css('z-index', '1');
+		    showBox.css('z-index', '9999');
+			hideBox.css('z-index', '1');
 			animate(showBox, {
 			    time: 0,
 				y: '100%',
@@ -105,8 +106,8 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 		},
 		
 		slidedown: function(showBox, hideBox) {
-		    showBox.show().css('z-index', '9999');
-			hideBox.show().css('z-index', '1');
+		    showBox.css('z-index', '9999');
+			hideBox.css('z-index', '1');
 			animate(showBox, {
 			    time: 0,
 				y: '-100%',
@@ -133,8 +134,8 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 		},
 		
 		closeup: function(showBox, hideBox) {
-		    showBox.show().css('z-index', '1');
-			hideBox.show().css('z-index', '9999');
+		    showBox.css('z-index', '1');
+			hideBox.css('z-index', '9999');
 			animate(showBox, {
 				callback: function() {
 				    animate(hideBox, {
@@ -158,8 +159,8 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 		},
 		
 		closedown: function(showBox, hideBox) {
-		    showBox.show().css('z-index', '1');
-			hideBox.show().css('z-index', '9999');
+		    showBox.css('z-index', '1');
+			hideBox.css('z-index', '9999');
 			animate(showBox, {
 				callback: function() {
 				    animate(hideBox, {
@@ -187,13 +188,15 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	iosSlide.closeright = iosSlide.slideleft;
 	
 	M.slider = {
-	    slide: function(showBox, hideBox, dir, reverse) {
+	    
+		slide: function(showBox, hideBox, dir, reverse) {
 			if (android) {
 			    andSlide(showBox, hideBox);
 			} else {
 			    reverse ? iosSlide['close' + dir](showBox, hideBox) : iosSlide['slide' + dir](showBox, hideBox);
 			}
 		}
+		
 	};
 	
 	return M;

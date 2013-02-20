@@ -38,6 +38,7 @@
 	}
 	
 	Mstar.window = $(win);
+	Mstar.slice = slice;
 	
 	Mstar.start = function() {
 	    if (Mstar._start) throw 'Mstar started.';
@@ -46,6 +47,21 @@
 	};
 	
 	Mstar.rword = /[^, ]+/g;
+	
+	var idCounter = 0;
+	Mstar.uniqueId = function(prefix) {
+	    var id = idCounter++;
+        return prefix ? prefix + id : id;
+	};
+	
+	Mstar.once = function(func) {
+	    var raned = false, ret;
+		return function() {
+		    if (raned) return ret;
+			raned = true;
+			return ret = func.apply(this, arguments);
+		};
+	};
 	
 	Mstar.has = function(obj, key) {
         return hasOwnProperty.call(obj, key);
