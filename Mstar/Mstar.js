@@ -48,11 +48,33 @@
 	
 	Mstar.rword = /[^, ]+/g;
 	
-	var idCounter = 0;
 	Mstar.uniqueId = function(prefix) {
-	    var id = idCounter++;
-        return prefix ? prefix + id : id;
+	    var idCounter = 0;
+		return function(prefix) {
+		    var id = idCounter++;
+            return prefix ? prefix + id : id;
+		};
+	}();
+	// GUID生成器
+	Mstar.guid = function() {
+	    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+			return v.toString(16);
+		}).toUpperCase();
 	};
+	
+	Mstar.uuid = function() {
+	    return ('mstar_') + (+new Date()) + (Math.random() + '').slice(-8);
+	}();
+	
+	// 根据某个对象得到其唯一对应的id，一般用于映射信息
+	Mstar.getUid = function() {
+	    var __UID__ = 1;
+		var uuid = Mstar.uuid;
+		return function(obj) {
+			return obj[uuid] || (obj[uuid] = __UID__++);
+		};
+	}();
 	
 	Mstar.once = function(func) {
 	    var raned = false, ret;
