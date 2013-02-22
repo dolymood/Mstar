@@ -8,7 +8,7 @@ define(['Mstar'], function(M) {
 		Implements: M.Event,
 		
 		init: function() {
-		    
+		    this.mid = M.uniqueId('controller');
 		}
 		
 	});

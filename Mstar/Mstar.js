@@ -76,6 +76,11 @@
 		};
 	}();
 	
+	Mstar.clone = function(obj) {
+	    if (!Mstar.isObject(obj)) return obj;
+		return Mstar.isArray(obj) ? obj.slice() : Mstar.mix({}, obj);
+	};
+	
 	Mstar.once = function(func) {
 	    var raned = false, ret;
 		return function() {
@@ -136,10 +141,18 @@
         return result;
     };
 	
+	Mstar.isObject = function(obj) {
+	    return obj === Object(obj);
+	};
+	
     Mstar.isFunction = function(o) {
         return toStr.call(o) === '[object Function]';
     };
     
+	Mstar.isArray = Array.isArray || function(ary) {
+	    return Mstar.type(ary, 'Array');
+	};
+	
 	Mstar.isDefined = function(o) {
 	    return typeof o != 'undefined';
 	};
@@ -150,6 +163,14 @@
 	
 	Mstar.isNumber = function(o) {
 	    return typeof o == 'number' && isFinite(o);
+	};
+	
+	Mstar.isEmpty = function(obj) {
+	    if (obj == null) return true;
+		if (Mstar.isArray(obj) || Mstar.isString(obj)) return obj.length === 0;
+		var has = Mstar.has;
+		for (var key in obj) if (has(obj, key)) return false;
+		return true;
 	};
 	
 	Mstar.getURLHash = function(url) {
