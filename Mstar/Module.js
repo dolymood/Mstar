@@ -1,0 +1,8 @@
+/**
+ *
+ */
+define(['Mstar'], function(M) {
+    
+	
+	
+});
