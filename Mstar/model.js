@@ -27,7 +27,6 @@ define(['Mstar'], function(M) {
 			this.attributes = attrs;
 			this.changed = {};
 			this.trigger('reset', attrs);
-			this.trigger('change', attrs);
 		},
 		
 		update: function(func, context) {

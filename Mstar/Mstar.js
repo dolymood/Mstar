@@ -194,6 +194,8 @@
 	    return slice.call(aryLike);
 	};
 	
+    Mstar.noop = function() {};
+    
 	Mstar.head = head;
 	Mstar.html = html;
 	
