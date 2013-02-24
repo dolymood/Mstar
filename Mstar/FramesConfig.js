@@ -9,10 +9,10 @@ define(function() {
 		fridoc: {
 		    
 			modules: [ // 包含的是此画面需要哪些模块组合
-				'header',
-				'pullRefresh',
-				'timeline',
-				'footer'
+				'Module/HeaderModule'
+				// 'PullRefresh',
+				// 'Timeline',
+				// 'Footer'
 			]
 			
 		},
@@ -20,10 +20,10 @@ define(function() {
 		profile: {
 		    
 			modules: [
-			    'header',
-				'userCard',
-				'switcher'
-			]
+			    'Header',
+				'UserCard',
+				'Switcher'
+			],
 			
 			frames: [] // 包含的是此画面需要的额外的一些控制
 		}

@@ -71,7 +71,7 @@ define(['jq', 'router', 'history'], function($, M) {
 	
 	function goTo(hash, dir) {
 	   	var act = his.getActive();
-		hash = hash || '#index';
+		hash = hash || '#fridoc';
 		if (act && hash === act.hash) return;
 		if (checkBack(hash)) { // 应该判断假设目的画面是当前画面的上一个的话 是否是执行的返回操作。
 		    goBack();

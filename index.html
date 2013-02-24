@@ -21,18 +21,6 @@
 </head>
 <body>
 	<div class="box" id="box1" style="-webkit-transform: translate3d(0%, 0, 0)">
-		<header class="hdw">
-		    <div class="center left back">
-			    <i></i>
-			</div>
-			<div class="btn center left">
-			    <i></i>
-			</div>
-			<p>header</p>
-			<div class="btn center right">
-			    <i></i>
-			</div>
-		</header>
 		<div class="body">
 			<div class="wrapper">
 				<div class="list">
@@ -340,5 +328,19 @@
 		    
 		});
 	</script>
+    <script id="tpl_header" type="text/tpl">
+        <header class="hdw <% if(showBack) { %> hasback <% } %>">
+		    <div class="center left back">
+			    <i></i>
+			</div>
+			<div class="btn menu center left">
+			    <i></i>
+			</div>
+			<p><%= content %></p>
+			<div class="btn center right">
+			    <i></i>
+			</div>
+		</header>
+    </script>
 </body>
 </html>

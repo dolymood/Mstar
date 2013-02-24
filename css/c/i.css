@@ -33,7 +33,7 @@ header .back {
     display: none;
 }
 header.hasback .back {
-    display: block;
+    display: -webkit-box;
 }
 header p {
 	-webkit-box-flex: 1;

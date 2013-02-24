@@ -96,12 +96,12 @@
 	
     Mstar.mix = function(target, source) {
         var args = Array.apply([], arguments),
-            override = typeof args[args.length - 1] == 'boolean' ? args.pop() : true;
+            override = typeof args[args.length - 1] == 'boolean' ? args.pop() : true,
             has = Mstar.has,
             i = 1, key;
         while((source = args[i++])) {
             for (key in source) {
-                if (has(source, key) && (ride || !(key in target))) {
+                if (has(source, key) && (override || !(key in target))) {
                     target[key] = source[key];
                 }
             }
@@ -194,6 +194,15 @@
 	    return slice.call(aryLike);
 	};
 	
+    Mstar.bind = function(func, context) {
+        context = context || win;
+        if (Mstar.isFunction(func)) {
+            return function() {
+                func.apply(context, arguments);
+            };
+        }
+    };
+    
     Mstar.noop = function() {};
     
 	Mstar.head = head;

@@ -2,11 +2,11 @@
  *
  */
 
-define(['Mstar'], function(M) {
+define(['Mstar', 'Event'], function(M, Event) {
     
 	var Model = M.Model = M.factory({
 	    
-		Implements: M.Event, // 从Event中混入属性
+		Implements: Event, // 从Event中混入属性
 		
 		init: function(attributes) {
 		    this.mid = M.uniqueId('model');
@@ -34,7 +34,7 @@ define(['Mstar'], function(M) {
 			var ret = func.call(context, this.attributes);
 			this.trigger('change', this.attributes);
 			return ret;
-		};
+		},
 		
 		has: function(func, context) {
 		    context || (context = this);
