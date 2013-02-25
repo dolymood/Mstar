@@ -239,7 +239,7 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 	}
 	
 	function navFrame(showBox, hash, data) {
-	    data.data.header.content += hash;
+	    data.data.header.content = 'header' + hash;
 		hash = '#fridoc';
 		var modules = FramesConfig[hash.replace(/^#/, '')].modules;
 		// modules.forEach(function(module, i) {
