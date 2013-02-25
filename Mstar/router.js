@@ -239,7 +239,8 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 	}
 	
 	function navFrame(showBox, hash, data) {
-	    data.data.header.content = 'header' + hash;
+	    console.log('dsf');
+		data.data.header.content = 'header' + hash;
 		hash = '#fridoc';
 		var modules = FramesConfig[hash.replace(/^#/, '')].modules;
 		// modules.forEach(function(module, i) {
@@ -252,7 +253,11 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 			    new arg(data).view.$el.appendTo(showBox);
 			});
 			showBox.trigger('renderFinish');
+			setTimeout(function() {
+			    data.data.header.showBack = true;
+			});
 		});
+		
 	}
 	
 	M.router = {
