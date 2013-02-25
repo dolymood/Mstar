@@ -23,7 +23,6 @@ function(M, $, Module, BaseModel, TimelineView, TimelineController) {
 					view: this.view
 				});
 			}
-			this.view.render();
         },
         
         destroy: function() {

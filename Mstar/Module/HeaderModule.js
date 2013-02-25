@@ -22,7 +22,6 @@ function(M, $, Module, Model, HeaderView, HeaderController) {
 				    view: this.view
 				});
 			}
-			this.view.render();
         },
         
         destroy: function() {

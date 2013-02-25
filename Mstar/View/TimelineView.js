@@ -9,11 +9,9 @@ define(['Mstar', '../View', '../View/ListView', '../View/MoreView'], function(M,
 		    options && (options.tplId || (options.tplId = 'tpl_body'));
 			View.call(this, options);
 			var that = this;
-			this.listView = new ListView({
+			var listView = this.listView = new ListView({
 			    model: this.model
-			}).bind('finishRender', function() {
-			    that.trigger('finishRender');
-			});;
+			});
 			this.moreView = new MoreView({
 			    model: this.model
 			});

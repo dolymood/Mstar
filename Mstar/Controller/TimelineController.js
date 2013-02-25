@@ -12,20 +12,25 @@ define(['Mstar', 'jq', '../Controller', '../Controller/MoreController'], functio
 				};
 			}
 			this.constructor._superClass.call(this, options);
+			// 加载更多 先绑定事件 后render
+			this.view.listView.itemsView.bind('finishRender', M.bind(this.onFinishRender, this));
+			this.view.render();
 			this.moreController = new MoreController({
 			    view: this.view.moreView,
 				model: this.model
-			});
+			});			
 		},
 		
 		onFinishRender: function() {
-		    if (!this.scroller) {
-			    this.scroller = new iScroller(this.view.$el[0], {useTransition: true});
-			} else {
-			    this.scroller.refresh();
-			}
 			console.log('tlinerender');
 			this.constructor._super.onFinishRender.call(this);
+			if (!this.scroller) {
+			    this.scroller = new iScroll(this.view.$el[0], {useTransition: true});
+			} else {
+			    setTimeout(function(scroller) {
+				    scroller.refresh();
+				}, 100, this.scroller);
+			}
 		}
 	
 	});

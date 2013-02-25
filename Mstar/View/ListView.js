@@ -11,8 +11,6 @@ define(['Mstar', '../View', '../View/ItemsView'], function(M, View, ItemsView) {
 			var that = this;
 			this.itemsView = new ItemsView({
 			    model: this.model
-			}).bind('finishRender', function() {
-			    that.trigger('finishRender');
 			});
 		},
 		

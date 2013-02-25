@@ -13,6 +13,7 @@ define(['Mstar', 'jq', '../Controller'], function(M, $, Controller) {
 				};
 			}
 			this.constructor._superClass.call(this, options);
+			this.view.render();
 		},
 		
 		showMenu: function() {
