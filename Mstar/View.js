@@ -3,16 +3,16 @@
  */
 define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
     
-	var ADD_TO_THIS = ['model', 'tplId', 'elem'];
+	var ADD_TO_THIS = ['model', 'tplId'];
     
     function bindSysEvents() {
         var model = this.model;
         if (model && model instanceof Model) {
-            model.bind('initialized', this.onModelInit, this);
-            model.bind('reset', this.onModelReset, this);
-            model.bind('change', this.onModelChange, this);
-            model.bind('clear', this.onModelClear, this);
-            model.bind('destroy', this.onModelDestroy, this);
+            model.bind('initialized', M.bind(this.onModelInit, this));
+            model.bind('reset', M.bind(this.onModelReset, this));
+            model.bind('change', M.bind(this.onModelChange, this));
+            model.bind('clear', M.bind(this.onModelClear, this));
+            model.bind('destroy', M.bind(this.onModelDestroy, this));
         }
     }
     
@@ -31,10 +31,10 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
 				}
 			}, this);
 			this.options = options;
-            if (this.elem) {
-                this.$el = $(this.elem);
-                delete this.elem;
-            }
+            // if (this.elem) {
+                // this.$el = $(this.elem);
+                // delete this.elem;
+            // }
             bindSysEvents.call(this);
 		},
 		
@@ -44,6 +44,7 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
 			this.$el = $(elem);
 			this.trigger('changeElem');
 			// 
+			return this;
 		},
 		
 		setModel: function(model) {
@@ -54,6 +55,7 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
 			if (pre) this.trigger('changeModel', model);
             bindSysEvents.call(this);
 			// this.render();
+			return this;
 		},
 		
 		setTpl: function(tplId) {
@@ -63,6 +65,7 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
 			this.tplId = tplId;
 			if (pre) this.trigger('changeTpl', tplId);
 			// this.render();
+			return this;
 		},
 		
         dom: function(func, context) {
@@ -78,19 +81,27 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
 			var tplId = this.tplId;
 			if (!tplId) throw 'View.js : the tpl cannot be null.';
 			this.trigger('beforeRender');
-            this.$el = $(Tpl.render(tplId, (model ? model.get(function(data) {return data;}) : (data || {}))));
+			var ret = $(Tpl.render(tplId, (data ? data : model ? model.getAttr() : {})));
+            if (!data) {
+			    this.$el = ret;
+			} else {
+			    this.$el = this.$el.parent().append(ret).children();
+			}
 			this.trigger('finishRender');
+			return this;
 		},
 		
 		clear: function() {
 		    this.$el.html('');
 			this.trigger('clear');
+			return this;
 		},
 		
 		remove: function(silent) {
 		    this.$el.remove();
             this.stopListening();
 			if (!silent) this.trigger('remove');
+			return this;
 		},
         
         destroy: function() {

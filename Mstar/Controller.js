@@ -9,8 +9,8 @@ define(['Mstar', 'Model', 'View'], function(M, Model, View) {
     function bindSysEvents() {
         var view = this.view;
         if (view && view instanceof View) {
-            view.bind('beforeRender', this.onBeforeRender, this);
-			view.bind('finishRender', this.onFinishRender, this);
+            view.bind('beforeRender', M.bind(this.onBeforeRender, this));
+			view.bind('finishRender', M.bind(this.onFinishRender, this));
         }
     }
     
@@ -18,7 +18,7 @@ define(['Mstar', 'Model', 'View'], function(M, Model, View) {
         var view = this.view, el;
         if (!view) return false;
         el = view.$el;
-        if (!el.length) return false;
+        if (!el || !el.length) return false;
         return el;
     }
 	

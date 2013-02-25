@@ -9,8 +9,8 @@ define(function() {
 		fridoc: {
 		    
 			modules: [ // 包含的是此画面需要哪些模块组合
-				'Module/HeaderModule'
-				// 'PullRefresh',
+				'Module/HeaderModule',
+				'Module/TimelineModule'
 				// 'Timeline',
 				// 'Footer'
 			]

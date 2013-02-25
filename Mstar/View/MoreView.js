@@ -3,14 +3,14 @@
  */
 define(['Mstar', '../View'], function(M, View) {
 
-    var HeaderView = M.factory(View, {
+    var MoreView = M.factory(View, {
 	    
 		init: function(options) {
-			options && (options.tplId || (options.tplId = 'tpl_header'));
+		    options && (options.tplId || (options.tplId = 'tpl_more'));
 			View.call(this, options);
 		}
 		
 	});
 	
-	return HeaderView;
+	return MoreView;
 });

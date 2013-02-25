@@ -1,15 +1,15 @@
 /**
  *
  */
-define(['Mstar', 'jq', '../Module', '../Model/HeaderModel', '../View/HeaderView', '../Controller/HeaderController'],
-function(M, $, Module, HeaderModel, HeaderView, HeaderController) {
+define(['Mstar', 'jq', '../Module', '../Model', '../View/HeaderView', '../Controller/HeaderController'],
+function(M, $, Module, Model, HeaderView, HeaderController) {
 	
     var HeaderModule = M.factory(Module, {
         
         init: function(options) {
 			this.constructor._superClass.call(this, options);
 			if (!this.model) {
-			    this.model = new HeaderModel(options);
+			    this.model = new Model(options.data.header);
 			}
 			if (!this.view) {
 				this.view = new HeaderView({
@@ -17,12 +17,12 @@ function(M, $, Module, HeaderModel, HeaderView, HeaderController) {
 					tplId: 'tpl_header'
 				});
 			}
-			this.view.render();
 			if (!this.controller) {
 				this.controller = new HeaderController({
 				    view: this.view
 				});
 			}
+			this.view.render();
         },
         
         destroy: function() {

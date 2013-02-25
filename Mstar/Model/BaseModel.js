@@ -3,7 +3,7 @@
  */
 define(['Mstar', '../Model'], function(M, Model) {
     
-	var HeaderModel = M.factory(Model, {
+	var BaseModel = M.factory(Model, {
 	    
 		init: function(options) {
 		    var data = options.data || {};
@@ -12,5 +12,5 @@ define(['Mstar', '../Model'], function(M, Model) {
 		
 	});
 	
-	return HeaderModel;
+	return BaseModel;
 });

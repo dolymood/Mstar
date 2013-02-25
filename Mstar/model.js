@@ -21,6 +21,10 @@ define(['Mstar', 'Event'], function(M, Event) {
 			return func.call(context, this.attributes);
 		},
 		
+		getAttr: function() {
+		    return this.attributes;
+		},
+		
 		set: function(attrs) {
 		    if (!attrs || this.attributes == attrs) return this;
 			this._previousAttributes = this.attributes;
@@ -31,8 +35,9 @@ define(['Mstar', 'Event'], function(M, Event) {
 		
 		update: function(func, context) {
 		    context || (context = this);
+			this._previousAttributes = this.attributes;
 			var ret = func.call(context, this.attributes);
-			this.trigger('change', this.attributes);
+			this.trigger('change', this.changed);
 			return ret;
 		},
 		
