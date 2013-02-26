@@ -32,9 +32,12 @@
 		body.addEventListener('touchmove', function(e) {
 			e.preventDefault();
 		});
-		setInterval(function() {
-			win.scrollTo(0, 0);
-		}, 1800);
+		setTimeout(function() {
+		    win.scrollTo(0, 1);
+			setInterval(function() {
+				win.scrollTo(0, 0);
+			}, 1500);
+		}, 500);
 	}
 	
 	Mstar.window = $(win);
