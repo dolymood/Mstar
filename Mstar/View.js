@@ -75,7 +75,7 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
             this.trigger('changeDom');
             return ret;
         },
-        
+		
 		render: function(data) {
             var model = this.model;
 			var tplId = this.tplId;
@@ -128,6 +128,8 @@ define(['jq', 'Mstar', 'template', 'Model'], function($, M, Tpl, Model) {
             this.remove();
         }
 	});
+	
+	View.render = Tpl.render;
 	
 	return (M.View = View);
 });

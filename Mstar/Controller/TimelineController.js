@@ -30,6 +30,7 @@ define(['Mstar', 'jq', '../Controller', '../Controller/MoreController'], functio
 			    setTimeout(function(scroller) {
 				    scroller.refresh();
 				}, 100, this.scroller);
+				// alert(this.model.getAttr().rows.length);
 			}
 		}
 	

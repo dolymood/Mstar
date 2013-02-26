@@ -28,7 +28,7 @@ define(['Mstar', 'jq', '../Controller'], function(M, $, Controller) {
 			model.update(function() {
 			    // this -- model
 				this.changed = {
-				    rows: data.rows.reverse()
+				    rows: M.clone(data.rows).reverse()
 				};
 				this.attributes.rows.push.apply(this.attributes.rows, this.changed.rows);
 			});

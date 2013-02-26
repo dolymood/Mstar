@@ -1,7 +1,8 @@
 /**
  * 
  */
-define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfig) {
+define(['jq', 'Mstar', 'slider', 'FramesConfig'],
+function($, M, M1, FramesConfig) {
     
 	var dirMap = {
 	    'left': 'right',
@@ -238,8 +239,9 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 	}
 	
 	function request(hash, callback) {
-	    setTimeout(function() {
-		    callback(tmpData);
+        // M.ajax();
+		setTimeout(function() {
+		    callback(M.clone(tmpData));
 		}, 600);
 	}
 	
@@ -274,20 +276,20 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 			}
 			console.log('显示：' + showData.hash + '::' + (reverse ? dirMap[showData.dir] : showData.dir));
 			var showBox = getBox(showData.hash);
-			showBox.bind('renderFinish', function() {
-			    // new iScroll(showBox.find('.body')[0], {useTransition: true});
-				// android 特殊处理..
-				if ($.os.android) {
-				    slide(showBox, loading);
-				} else {
-				    M.animate(showBox);
-					M.animate(loading, {
-						x: '-100%'
-					});
-				}
-			});
 			if (!showBox._hasRendered_) {
-			    slide(loading, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);
+			    showBox.bind('renderFinish', function() {
+					// new iScroll(showBox.find('.body')[0], {useTransition: true});
+					// android 特殊处理..
+					if ($.os.android) {
+						slide(showBox, loading);
+					} else {
+						M.animate(showBox);
+						M.animate(loading, {
+							x: '-100%'
+						});
+					}
+				});
+				slide(loading, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);
 				request(showData.hash, function(data) {
 					navFrame(showBox, showData.hash, data);
 				});

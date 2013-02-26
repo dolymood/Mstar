@@ -117,6 +117,5 @@ define(['jq', 'router', 'history'], function($, M) {
 		}
 	};
 	
-	navigator.start();
 	return M;
 });
