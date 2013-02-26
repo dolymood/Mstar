@@ -33,6 +33,7 @@ lib/jq.mobi.js
 lib/touch.js
 Mstar/Mstar.js
 Mstar/app.js
+Mstar/storage.js
 Mstar/navigator.js
 Mstar/ApplicationCacheSupport.js
 Mstar/router.js
