@@ -11,6 +11,7 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 	};
 	var hashToBoxMap = {};
 	var slide = M.slider.slide;
+	var android = $.os.android;
 	var loading = $('#loading');
 	var box1 = $('#box1');
 	
@@ -218,7 +219,11 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 	    var box = document.createElement('div');
 		box.id = hash.replace(/^#/, '');
 		box.className = 'box';
-		box.style.webkitTransform = 'translate3d(-100%, 0, 0)';
+		if (android) {
+		    box.style.marginLeft = '-100%';
+		} else {
+		    box.style.webkitTransform = 'translate3d(-100%, 0, 0)';
+		}
 		document.body.appendChild(box);
 		return box;
 	}
@@ -271,10 +276,15 @@ define(['jq', 'Mstar', 'slider', 'FramesConfig'], function($, M, M1, FramesConfi
 			var showBox = getBox(showData.hash);
 			showBox.bind('renderFinish', function() {
 			    // new iScroll(showBox.find('.body')[0], {useTransition: true});
-				M.animate(showBox);
-				M.animate(loading, {
-				    x: '-100%'
-				});
+				// android 特殊处理..
+				if ($.os.android) {
+				    slide(showBox, loading);
+				} else {
+				    M.animate(showBox);
+					M.animate(loading, {
+						x: '-100%'
+					});
+				}
 			});
 			if (!showBox._hasRendered_) {
 			    slide(loading, (hideBox || box1), reverse ? hideData.dir : showData.dir, reverse);

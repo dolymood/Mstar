@@ -20,14 +20,14 @@
 <link rel="stylesheet" href="./css/c/i.css">
 </head>
 <body>
-	<div class="box" id="box1" style="-webkit-transform: translate3d(0, 0, 0)">
+	<div class="box" id="box1" style="">
 		欢迎页面。。。。
 		欢迎页面。。。。
 		欢迎页面。。。。
 		欢迎页面。。。。
 		欢迎页面。。。。
 	</div>
-	<div class="box" id="box2" style="-webkit-transform: translate3d(-100%, 0, 0)">
+	<div class="box" id="box2" style="display: none">
 	    <header>
 		    <div class="center left back">
 			    <i></i>
@@ -65,7 +65,7 @@
 	</script>
     <script id="tpl_header" type="text/tpl">
         <header class="hdw <% if(showBack) { %> hasback <% } %>">
-		    <div class="center left back">
+		    <div class="btn center left back">
 			    <i></i>
 			</div>
 			<div class="btn menu center left">
@@ -80,19 +80,16 @@
 	<script id="tpl_body" type="text/tpl">
 	    <div class="body">
 		    <div class="wrapper">
-			    
 			</div>
 		</div>
 	</script>
 	<script id="tpl_list" type="text/tpl">
-		<div class="list">
-			
+		<div class="list">	
 		</div>
     </script>
 	<!------------方便加载更多----------->
 	<script id="tpl_item" type="text/tpl">
 	    <% for (var i = 0, len = rows.length, tmp; i < len; i++) { tmp = rows[i]; %>
-		    
 			<div class="item" data-href="<%= tmp.url %>">
 				<div class="head" style="background:url(<%= tmp.bgurl %>) no-repeat center;"></div>
 				<div class="content">

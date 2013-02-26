@@ -8,7 +8,12 @@ define(['jq', 'Mstar', 'animate'], function($, M) {
 	
 	// android slide events-[animationStart animationEnd startShow startHide finishShow finishHide]
 	function andSlide(showBox, hideBox) {
-	    
+	    showBox.hide().css('z-index', '9999');
+	    hideBox.css('z-index', '1');
+		showBox.show().css('margin-left', '0');
+		hideBox.css('margin-left', '-100%').hide();
+		showBox.css('z-index', '');
+		hideBox.css('z-index', '');
 	}
 	
 	function hide_box(box) {

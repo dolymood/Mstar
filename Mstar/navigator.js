@@ -92,6 +92,13 @@ define(['jq', 'router', 'history'], function($, M) {
 		his.add(hash, showData);
 	}
 	
+	function initAndroidBox() {
+	    if ($.os.android) {
+		    // 修改loading的默认状态
+			$('#loading').hide().css('margin-left', '-100%').css('-webkit-transform', '');
+		}
+	}
+	
 	var navigator = M.navigator = {
 	    _start: false,
 		start: function() {
@@ -104,6 +111,7 @@ define(['jq', 'router', 'history'], function($, M) {
                  .bind('touchstart', touchStartHandler)
                  .trigger('orientationchange');
 			M.window.bind('hashchange', hashchangeHandler);
+			initAndroidBox();
             goTo(locn.hash);
 			navigator._start = true;
 		}
