@@ -35,6 +35,7 @@
 		setTimeout(function() {
 		    win.scrollTo(0, 1);
 			setInterval(function() {
+				win.scrollTo(0, 1);
 				win.scrollTo(0, 0);
 			}, 1500);
 		}, 500);
