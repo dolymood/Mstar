@@ -1,7 +1,7 @@
 /**
  * 
  */
-define(['Mstar'], function(M) {
+define(['Mstar', 'Event'], function(M, Event) {
 	
 	var his = M.history = {
 	    
@@ -50,9 +50,17 @@ define(['Mstar'], function(M) {
 
 			data.url = url;
 			this.history.push(data);
-			this.activeIndex = this.history.length - 1;
+			this.updateActiveIndex(this.history.length - 1);
+		},
+		
+		updateActiveIndex: function(i) {
+			this.activeIndex = i;
+			this.trigger('hischange', i);
 		}
+		
 	};
+	
+	M.mix(M.history, Event);
 	
 	return M;
 });

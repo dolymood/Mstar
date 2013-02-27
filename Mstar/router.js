@@ -1,8 +1,8 @@
 /**
  * 
  */
-define(['jq', 'Mstar', 'slider', 'FramesConfig'],
-function($, M, M1, FramesConfig) {
+define(['jq', 'Mstar', 'slider', 'FramesConfig', 'framesManager'],
+function($, M, M1, FramesConfig, framesManager) {
     
 	var dirMap = {
 	    'left': 'right',

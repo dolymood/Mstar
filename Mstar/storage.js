@@ -35,6 +35,13 @@ define(['Mstar', 'jq'], function(M, $) {
 			
 			removeItem: function(key) {
 				lStorage.removeItem(key);
+			},
+			
+			removeAll: function() {
+			    var that = this;
+				Object.keys(lStorage).forEach(function(key) {
+				    that.removeItem(key);
+				});
 			}
 			
 		},
@@ -51,6 +58,13 @@ define(['Mstar', 'jq'], function(M, $) {
 			
 			removeItem: function(key) {
 				sStorage.removeItem(key);
+			},
+			
+			removeAll: function() {
+			    var that = this;
+				Object.keys(sStorage).forEach(function(key) {
+				    that.removeItem(key);
+				});
 			}
 			
 		},

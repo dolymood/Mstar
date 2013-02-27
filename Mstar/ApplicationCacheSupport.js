@@ -17,9 +17,11 @@ define(['Mstar', 'Event'], function(M, Event) {
 	
 	window.ononline = function() {
 	    ApplicationCacheSupport.trigger('online');
+		ApplicationCacheSupport.isOnline = true;
 	};
 	window.onoffline = function() {
 	    ApplicationCacheSupport.trigger('offline');
+		ApplicationCacheSupport.isOnline = false;
 	};
 	
 	appCache.addEventListener('updateready', function() {

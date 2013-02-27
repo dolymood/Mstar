@@ -66,7 +66,7 @@ define(['jq', 'router', 'history'], function($, M) {
 		    return;
 		}
 		router.route(his.getActive(), his.getPrev(), true);
-		his.activeIndex -= 1;
+		his.updateActiveIndex(his.activeIndex - 1);
 	}
 	
 	function goTo(hash, dir) {
