@@ -1,8 +1,12 @@
 ﻿主要文件顺序：
 Mstar
+ApplicationCacheSupport
 app
 navigator
+Event
 history
+framesManager
+storage
 animate
 slider
 FramesConfig
