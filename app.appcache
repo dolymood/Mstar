@@ -56,6 +56,7 @@ Mstar/View/ListView.js
 Mstar/View/ItemsView.js
 Mstar/View/MoreView.js
 Mstar/Controller/HeaderController.js
+Mstar/Controller/DelayedImageController.js
 Mstar/Controller/TimelineController.js
 Mstar/Controller/MoreController.js
 

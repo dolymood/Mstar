@@ -95,7 +95,7 @@
 					<div class="title"><%= tmp.title %></div>
 					<div class="says"><%= tmp.content %></div>
 					<% if (tmp.mediaurl) { %>
-					    <div class="media" style="background:url(<%= tmp.mediaurl %>) no-repeat center;"></div>
+					    <div class="media" data-delay="<%= tmp.mediaurl %>"></div>
 					<% } %>
 				</div>
 			</div>
