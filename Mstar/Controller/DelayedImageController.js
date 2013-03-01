@@ -78,7 +78,18 @@ define(['Mstar', 'jq', '../Controller'], function(M, $, Controller) {
 		},
 		
 		loadImage: function(img) {
-			img.style.backgroundImage = ('url(' + img.getAttribute('data-delay') +')');
+			var ig = new Image();
+			var src = img.getAttribute('data-delay');
+			img.innerHTML = '加载中...';
+			ig.onload = function() {
+			    img.innerHTML = '';
+				img.style.cssText = ('background-image: url(' + src +
+				                     '); height: ' + img.height + 'px; line-height: ' + img.height + ';');
+			};
+			ig.onerror = function() {
+			    img.innerHTML = '加载失败';
+			};
+			ig.src = src;
 			img.removeAttribute('data-delay');
 		},
 		
