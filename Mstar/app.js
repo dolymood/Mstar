@@ -34,7 +34,7 @@ function($, AppSupport, M, storage) {
 					    try {
 						    locStorage.setItem(argsObj.url, JSON.stringify(data));
 						} catch(e) {
-						    throw 'M.ajax setItem error.'
+						    throw 'M.ajax success function error.'
 						}
 						success(data);
 					};
